@@ -1,0 +1,1371 @@
+% Tischtennis       (1P)
+% Pantomime         (1P)
+% Bogenschießen     (1P)
+% Auto fahren       (1P)
+% Wettrechnen       (1P)
+% Steine stappeln   (1P)
+% Stein, Scheere, Papier (1P)
+% mit verbundenen Augen führen (2 P)
+% Geschmackstest
+% halbieren
+%
+% 4-rer Liegestütz
+% Lied singen
+%
+
+% presentation
+\documentclass[compress,aspectratio=1610,fleqn,10pt]{beamer}
+
+\usepackage{mtex,fancyvrb,booktabs,multimedia}
+\usepackage{multicol}
+\usepackage{tikz,pgfplots}
+\renewcommand{\vec}[1]{\ensuremath \mathbf{\boldsymbol{#1}}}
+\usepackage{pifont}
+\definecolor{darkgreen}{rgb}{0,0.7,0}      % hellgruener Rahmen
+\definecolor{darkred}{rgb}{0.7,0,0}      % hellgruener Rahmen
+\definecolor{darkyellow}{rgb}{0.8,0.65,0}      % hellgruener Rahmen
+\newcommand{\checked}{\textcolor{darkgreen}{\ding{51}}}
+\newcommand{\crossed}{\textcolor{darkred}{\ding{54}}}
+\newcommand{\ok}{\textcolor{darkyellow}{\ding{108}}}
+
+%\usepackage{enumitem}
+ % \setitemize{label=\usebeamerfont*{itemize item}%
+ %   \usebeamercolor[fg]{itemize item}
+ %   \usebeamertemplate{itemize item}}
+
+\setbeamertemplate{items}[circle]
+
+\newcommand\paritem{%
+  \hspace{1em}
+  \begingroup
+  \leavevmode
+  \usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}%
+  \usebeamertemplate**{itemize item}%
+  \endgroup
+  \hspace{\parsep}
+}
+\setbeamertemplate{section in toc}{\hspace*{1em}\inserttocsection}
+
+% \newcommand{\labelitemi}{%
+%   \begingroup%
+%   \leavevmode%
+%   \usebeamerfont*{itemize item}%
+%   \usebeamercolor[fg]{itemize item}%
+%   \usebeamertemplate**{itemize item}%
+%   \endgroup%
+%  }
+
+
+\title{Orientation Relationships in MTEX and Parent Grain Reconstruction}
+
+\institute{Faculty of Mathematics and Computer Science,\\
+	TU Bergakademie Freiberg, Germany}
+
+\date{MTEX Workshop 2024}
+
+
+\author{R. Hielscher }
+
+
+% \institute[TU Chemnitz]{
+%   \vspace{-1cm}\
+%   \begin{minipage}{0.25\linewidth}
+%   % \centering{\movie[autostart,height = 3.025cm, width = 3cm, poster, loop]{}{olivineSmooth.swf}}
+%   \end{minipage}
+%   \begin{minipage}{0.4\linewidth}
+%     \begin{center}
+%       \vspace{-1cm}
+%       Faculty of Mathematics,\\
+%       Chemnitz University of Technology, Germany
+%     \end{center}
+
+%   \end{minipage}
+%   \begin{minipage}{0.25\linewidth}
+%  %\centering{   \movie[autostart,height = 3.025cm, width = 3cm, poster, loop]{}{olivineSmooth.swf}}
+%   \end{minipage}
+
+% }
+
+
+\begin{document}
+
+\frame[plain]{\titlepage}
+
+\begin{frame}
+  \frametitle{The Emsland Meteorite}
+  %Orientation Relationships
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}     
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+
+        % \structure{Where do the come form:}
+
+        % external strain results in (small) changes of the atom lattice
+        % \begin{itemize}
+        % \item dislocations
+        % \item new orientation (twinning)
+        % \item new phase
+        % \end{itemize}
+   
+        
+        \begin{itemize}
+        \item<1-> found 1940 in a moor in Lower Saxony
+        \item<1-> 19kg, 22 × 19 × 13cm
+        \item<2-> 87\% Ferrit, 13\% Austenit
+        \item<2-> data by Gert Nolze
+        \item<3-> all Austenite from one prior grain
+        \item<4-> Ferrite has very specific texture
+        \item<5-> Austenite to Ferrite misorientations
+        \end{itemize}
+
+        %\bigskip
+
+        \begin{center}
+          \only<3>{\includegraphics[width=4.5cm]{pic/oriParent}}
+          \only<4>{\includegraphics[width=4.5cm]{pic/oriChild}}
+          \only<5>{\includegraphics[width=4.5cm]{pic/moriScatterFull}}
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{center}
+          \only<1>{\includegraphics[width=0.8\textwidth]{pic/emslandMetereoit}\vspace{0.5cm}\
+          }
+          \only<2->{%
+            \vspace{-1cm}%
+            \includegraphics[height=0.95\textheight]{pic/mapFerrite}\vspace{0.5cm}\
+          }
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Determination of the Parent to Child Orientation Relationship}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Theoretical Austenite $\rightarrow$ Ferrite Orientation Relationships}
+
+\begin{center}
+  \only<1>{\includegraphics[width=0.925\textwidth]{pic/pfSuperposed.png}}
+  \only<2>{\includegraphics[width=0.925\textwidth]{pic/pfKS}}
+  \only<3>{\includegraphics[width=0.925\textwidth]{pic/pfNW}}
+  \only<4>{\includegraphics[width=0.925\textwidth]{pic/pfGT}}
+  % \only<5>{\includegraphics[width=\textwidth]{pic/pfMean}}
+  % \only<6>{\includegraphics[width=\textwidth]{pic/pfMax}}
+  % \only<7>{\includegraphics[width=\textwidth]{pic/pfIter}}
+  % \only<8>{\includegraphics[width=0.8\textwidth]{pic/moriScatter}}
+\end{center}
+
+\vspace{-0.2cm}
+
+  \begin{overlayarea}{\textwidth}{3cm}
+    \begin{columns}[T,onlytextwidth]
+      \begin{column}{0.59\textwidth}
+        \begin{itemize}
+        \item<1-> parent and child orientations in the meteorite
+        \item<2-> Kurdjumov Sachs: $(111)_{\gamma} || (011)_{\alpha}$,
+          $[\bar 101]_{\gamma} || [\bar 1 \bar 1 1]_{\alpha}$
+        \item<3-> Nishiyama Wassermann:
+          $(111)_{\gamma} || (011)_{\alpha}$,
+          $[11\bar 2]_{\gamma} || [0\bar 1 1]_{\alpha}$
+        \item<4-> Greninger Trojano
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.385\textwidth}
+    \begin{onlyenv}<2>
+\begin{lstlisting}[style=output]
+p2c = misorientation (gamma -> alpha)
+ 
+  Bunge Euler angles in degree
+     phi1   Phi  phi2  Inv.
+    335.8  10.5  65.8     0
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<3>
+\begin{lstlisting}[style=output]
+p2c = misorientation (gamma -> alpha)
+ 
+  Bunge Euler angles in degree
+   phi1  Phi  phi2  Inv.
+    180   99    45     0
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<4>
+\begin{lstlisting}[style=output]
+p2c = misorientation (gamma -> alpha)
+ 
+  Bunge Euler angles in degree
+     phi1   Phi  phi2  Inv.
+    172.5  46.6 177.3     0
+\end{lstlisting}
+    \end{onlyenv}
+  \end{column}
+\end{columns}
+  \begin{onlyenv}<2>
+\begin{lstlisting}[style=input]
+gamma_111 = Miller(1,1,1,csGamma,'hkl')
+p2c = orientation.map( gamma_111, alpha_100, gamma_101, alpha_111)
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<3>
+\begin{lstlisting}[style=input]
+p2c = orientation.NishiyamaWassermann(csGamma,csAlpha)
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<4>
+\begin{lstlisting}[style=input]
+p2c = orientation.GreningerTrojano(csGamma,csAlpha)
+\end{lstlisting}
+    \end{onlyenv}
+  \end{overlayarea}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Experimental Austenite $\rightarrow$ Ferrite Orientation Relationships}
+
+  \begin{center}
+    \only<1>{\includegraphics[width=0.925\textwidth]{pic/pfMean}}
+    \only<2>{\includegraphics[width=0.925\textwidth]{pic/pfMax}}
+    \only<3-4>{\includegraphics[width=0.925\textwidth]{pic/pfIter}}
+    \only<5>{\includegraphics[width=0.825\textwidth]{pic/moriScatter.png}}
+  \end{center}
+  \begin{overlayarea}{\textwidth}{3cm}
+    \begin{itemize}
+    \item<1-4> average parent to child misorientation%: \lstinline{p2cMean = mean( inv(oriChild) * oriP )}
+      \uncover<2-4>{\paritem maximum of misorientation distribution function}        
+    \item<3-4> maximize fit to all child to child misorientations
+      \uncover<4>{\paritem iterative method of T. Nyyssönen}
+    \end{itemize}
+        \begin{onlyenv}<1>
+\begin{lstlisting}[style=input]
+mori = grains.boundary('gamma','alpha').misorientation
+p2c  = mean(mori)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2>
+\begin{lstlisting}[style=input]
+mdf = calcDensity(mori)
+[~,p2c] = max(mdf)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<3-4>
+\begin{lstlisting}[style=input]
+mori = grains.boundary('alpha','alpha').misorientation
+p2c  = calcParent2Child(mori)
+\end{lstlisting}
+        \end{onlyenv}
+      \end{overlayarea}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Parent and Child Variants}
+
+  \begin{overlayarea}{\textwidth}{0.85\textheight}
+    \begin{columns}[T,onlytextwidth]
+      \begin{column}{0.58\textwidth}
+        \begin{block}{}
+          \begin{itemize}
+          \item $\mathtt{ori_{P}}$ - parent orientation
+            \paritem $\mathtt{ori_{C}}$ - child orientation
+          \item $\mathtt{sym_{P}}$ - parent symmetry \hspace{1pt}
+            \paritem $\mathtt{sym_{C}}$ - child symmetry
+          \item $\mathtt{p2c}$ - parent to child misorientation
+          \end{itemize}
+        \end{block}
+
+        % \vspace{-0.5cm}
+
+
+        \structure{child variants:}
+        $\mathtt{ori_{P}} = \mathtt{ori_{C}} \cdot \mathtt{sym_{C}} \cdot
+        \mathtt{p2c}$
+
+        \medskip
+        
+        \structure{parent variants:}
+        $\mathtt{ori_{C}} = \mathtt{ori_{P}} \cdot \mathtt{sym_{P}} \cdot
+        \mathtt{inv}(\mathtt{p2c})$
+
+       
+        \begin{onlyenv}<2->
+\begin{lstlisting}[style=input]
+cv = variants(p2c,ori_p)
+pv = variants(p2c,ori_c)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2>
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+cv = misorientation (Austenite -> Ferrite, bcc)
+  size: 1 x 24
+
+pv = misorientation (Ferrite, bcc -> Austenite)
+  size: 1 x 24
+ \end{lstlisting}
+      \end{onlyenv}
+      
+
+      \bigskip
+
+      \begin{onlyenv}<3->
+        \structure{Child to Child Misorientation:}
+        \vspace{-0.2cm}
+\begin{lstlisting}[style=input]
+c2c = p2c * sym_P * inv(p2c)
+c2c = variants(p2c,'child') * inv(p2c)
+\end{lstlisting}
+      \end{onlyenv}
+        \begin{onlyenv}<3>
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+c2c = misorientation (Ferrite, bcc -> Ferrite, bcc)
+  size: 1 x 24
+ \end{lstlisting}
+        \end{onlyenv}
+        
+      \bigskip
+
+      \begin{onlyenv}<4->
+        \structure{Detect Child to Child Grain Boundaries:}
+        \vspace{-0.2cm}
+\begin{lstlisting}[style=input]
+omega = angle_outer(gB.misorientation,c2c)
+pg = merge(grains, gB(omega < 5*degree) )
+\end{lstlisting}
+      \end{onlyenv}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \only<1>{
+        \includegraphics[width=\textwidth]{pic/pfSingleVariant1}}%
+      \only<2>{%
+        \includegraphics[width=\textwidth]{pic/pfSingleVariant2}}%
+      \only<3>{%
+        \includegraphics[width=\textwidth]{pic/pfSingleVariant3}}
+      \only<4>{%
+        \includegraphics[width=\textwidth]{pic/mapFerriteBoundaries}}%
+    \end{column}
+  \end{columns}
+\end{overlayarea}
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{A two-stage transformation microstructure}
+
+    \begin{overlayarea}{\textwidth}{0.85\textheight}
+
+  \includegraphics[width=0.3\textwidth]{pic/gammaRaw}
+  \quad
+  \includegraphics[width=0.3\textwidth]{pic/EpsRaw}
+  \quad
+  \includegraphics[width=0.3\textwidth]{pic/alphaRaw}
+
+  \hspace{2.04cm} $\gamma$ \hspace{2.04cm} $\to$
+  \hspace{2.04cm} $\varepsilon$ \hspace{2.04cm} $\to$
+  \hspace{2.04cm} $\alpha'$
+
+  \bigskip
+
+  \begin{itemize}
+  \item cold-rolled high-Mn steel, EBSD map courtesy: Pramanik et al.
+  \item face-centered cubic parent $\gamma$ austenite
+  \item partially transformed to hexagonally close-packed $\varepsilon$
+    martensite
+  \item partially transformed to body-centered tetragonal $\alpha'$ martensite
+  \end{itemize}
+
+\end{overlayarea}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Step 1: Grain Reconstruction}
+
+  \begin{overlayarea}{\textwidth}{0.85\textheight}
+
+    \includegraphics[width=0.3\textwidth]{pic/gammaGrains}
+    \quad
+    \includegraphics[width=0.3\textwidth]{pic/EpsGrains}
+    \quad
+    \includegraphics[width=0.3\textwidth]{pic/alphaGrains}
+
+    \hspace{2.04cm} $\gamma$ \hspace{2.04cm} $\to$
+    \hspace{2.04cm} $\varepsilon$ \hspace{2.04cm} $\to$
+    \hspace{2.04cm} $\alpha'$
+
+    \bigskip
+
+\begin{lstlisting}[style=input]
+[grains,ebsd.grainId] = calcGrains(ebsd)
+\end{lstlisting}
+    \vspace{-0.2cm}
+\begin{lstlisting}[style=output]
+grains = grain2d
+
+ Phase  Grains   Pixels  Mineral  Symmetry  Crystal reference frame
+     1     494  1023948    gamma      m-3m
+     2    3333   298246   alphaP      m-3m
+     3    1981   181392  epsilon     6/mmm       X||a*, Y||b, Z||c*
+
+ boundary segments: 204064
+ inner boundary segments: 7542
+ triple points: 9493
+
+ Properties: GOS, meanRotation
+\end{lstlisting}
+
+  \end{overlayarea}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The \texttt{parentGrainReconstructor}}
+
+  \begin{overlayarea}{\textwidth}{0.85\textheight}
+
+  \includegraphics[width=0.3\textwidth]{pic/gammaGrains}
+  \quad
+  \includegraphics[width=0.3\textwidth]{pic/EpsGrains}
+  \quad
+  \includegraphics[width=0.3\textwidth]{pic/alphaGrains}
+
+  \hspace{2.04cm} $\gamma$ \hspace{2.04cm} $\to$
+  \hspace{2.04cm} $\varepsilon$ \hspace{2.04cm} $\to$
+  \hspace{2.04cm} $\alpha'$
+
+\bigskip
+
+    \begin{onlyenv}<2>
+\begin{lstlisting}[style=input]
+job = parentGrainReconstructor(ebsd,grains)
+job.p2c = orientation.Burgers(csEps,csAlpha)
+\end{lstlisting}
+\begin{lstlisting}[style=output]
+job = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  epsilon  6/mmm     1981    12%   0%
+ child   alphaP   m-3m      3333    20%
+
+ OR: (0001) || (110) [-12-10] || [-111]
+   c2c fit: 0.6°, 0.9°, 1.3°, 2.2° (quintiles)
+   p2c fit: 0.8°, 1.2°, 1.6°, 2.4° (quintiles)
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<1>
+\begin{lstlisting}[style=input]
+job = parentGrainReconstructor(ebsd,grains)
+job.p2c = orientation.ShojiNishiyama(csGamma, csEps)
+\end{lstlisting}
+\begin{lstlisting}[style=output]
+job = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  gamma    m-3m      494     68%   0%
+ child   epsilon  6/mmm     1981    12%
+
+ OR: (111) || (0001)   [10-1] || [2-1-10]
+   c2c fit: 0.4°, 0.9°, 1.7°, 4.2° (quintiles)
+   p2c fit: 0.5°, 0.9°, 1.3°, 2.8° (quintiles)
+\end{lstlisting}
+    \end{onlyenv}
+
+    \begin{onlyenv}<3>
+\begin{lstlisting}[style=input]
+job = parentGrainReconstructor(ebsd,grains)
+job.p2c = orientation.KurdjumovSachs(csGamma, csAlpha)
+\end{lstlisting}
+\begin{lstlisting}[style=output]
+job = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  gamma    m-3m      494     68%   0%
+ child   alphaP   m-3m      3333    20%
+
+ OR: (111) || (110)   [-101] || [1-11]
+   c2c fit: 0.8°, 1.3°, 1.9°, 3.2° (quintiles)
+   p2c fit: 0.8°, 1.1°, 1.6°, 2.3° (quintiles)
+\end{lstlisting}
+    \end{onlyenv}
+
+  \end{overlayarea}
+
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Step 2: $\varepsilon \to \alpha'$ Reconstruction}
+
+  \begin{overlayarea}{\textwidth}{0.85\textheight}
+
+    \begin{onlyenv}<1>
+      \includegraphics[width=0.3\textwidth]{pic/gammaGrains} \quad
+      \includegraphics[width=0.3\textwidth]{pic/EpsGrains} \quad
+      \includegraphics[width=0.3\textwidth]{pic/alphaGrains}
+    \end{onlyenv}
+    \begin{onlyenv}<2>
+      \includegraphics[width=0.3\textwidth]{pic/gammaGrains} \quad
+      \includegraphics[width=0.3\textwidth]{pic/EpsRec_4} \quad
+      \includegraphics[width=0.3\textwidth]{pic/AlphaRec_4}
+    \end{onlyenv}
+
+    \hspace{2.04cm} $\gamma$ \hspace{2.04cm} $\to$ \hspace{2.04cm}
+    $\varepsilon$ \hspace{2.04cm} $\to$ \hspace{2.04cm} $\alpha'$
+
+    \begin{onlyenv}<1>
+\begin{lstlisting}[style=input]
+job.p2c = orientation.Burgers(csEps,csAlpha)
+job.calcVariantGraph
+job.clusterVariantGraph
+\end{lstlisting}
+    \end{onlyenv}
+        \begin{onlyenv}<2>
+\begin{lstlisting}[style=input]
+job.p2c = orientation.Burgers(csEps,csAlpha)
+job.calcVariantGraph
+job.clusterVariantGraph
+job.calcParentFromVote
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<1>
+      \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+job = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  epsilon  6/mmm     1981    12%   0%
+ child   alphaP   m-3m      3333    20%
+
+ OR: (0001)||(110)  [-2110]||[1-11]
+   c2c fit: 0.6°, 0.9°, 1.3°, 2.2° (quintiles)
+   p2c fit: 0.8°, 1.2°, 1.6°, 2.4° (quintiles)
+
+ votes: 3333 x 1
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<2>
+      \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+job = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  epsilon  6/mmm     5117    32%   94%
+ child   alphaP   m-3m      197     0.2%
+
+ OR: (0001)||(110)  [-2110]||[1-11]
+   p2c fit: 3.6°, 4.4°, 5.4°, 8.9° (quintiles)
+   c2c fit: 3.3°, 3.4°, 3.8°, 8° (quintiles)
+\end{lstlisting}
+    \end{onlyenv}
+  \end{overlayarea}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Step 3: $\gamma \to \varepsilon$ Reconstruction}
+
+  \begin{overlayarea}{\textwidth}{0.85\textheight}
+
+    \begin{onlyenv}<1>
+      \includegraphics[width=0.3\textwidth]{pic/gammaGrains} \quad
+      \includegraphics[width=0.3\textwidth]{pic/EpsRec_5} \quad
+      \includegraphics[width=0.3\textwidth]{pic/alphaRec_4}
+    \end{onlyenv}
+    \begin{onlyenv}<2>
+      \includegraphics[width=0.3\textwidth]{pic/gammaRec_9} \quad
+      \includegraphics[width=0.3\textwidth]{pic/EpsRec_9} \quad
+      \includegraphics[width=0.3\textwidth]{pic/alphaRec_4}
+    \end{onlyenv}
+    \begin{onlyenv}<3>
+      \includegraphics[width=0.3\textwidth]{pic/gammaRec_10} \quad
+      \includegraphics[width=0.3\textwidth]{pic/EpsRec_9} \quad
+      \includegraphics[width=0.3\textwidth]{pic/alphaRec_10}
+    \end{onlyenv}
+
+    \hspace{2.04cm} $\gamma$ \hspace{2.04cm} $\to$ \hspace{2.04cm}
+    $\varepsilon$ \hspace{2.04cm} $\to$ \hspace{2.04cm} $\alpha'$
+
+    \begin{onlyenv}<1>
+\begin{lstlisting}[style=input]
+job.mergeSimilar
+\end{lstlisting}
+      \vspace{-0.4cm}
+    \end{onlyenv}
+    \begin{onlyenv}<1>
+\begin{lstlisting}[style=input]
+job2 = parentGrainReconstructor(job.ebsd, job.grains)
+job2.p2c = orientation.ShojiNishiyama(csGamma, csEps)
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<2>
+\begin{lstlisting}[style=input]
+job2 = parentGrainReconstructor(job.ebsd, job.grains)
+job2.p2c = orientation.ShojiNishiyama(csGamma, csEps)
+job2.calcVariantGraph
+job2.clusterVariantGraph
+job2.calcParentFromVote
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<3>
+\begin{lstlisting}[style=input]
+job3 = parentGrainReconstructor(job2.ebsd, job2.grains)
+job3.p2c = job.p2c * job2.p2c
+\end{lstlisting}
+\vspace{-0.4cm}
+\begin{lstlisting}[style=input]
+job3.calcVariantGraph
+job3.clusterVariantGraph
+job3.calcParentFromVote
+\end{lstlisting}
+    \end{onlyenv}
+    \begin{onlyenv}<1>
+      \vspace{-0.4cm}
+\begin{lstlisting}[style=output]
+job2 = parentGrainReconstructor (show methods, plot)
+
+ phase   mineral  symmetry  grains  area  reconstructed
+ parent  gamma    m-3m      469     68%   0%
+ child   epsilon  6/mmm     1010    32%
+
+ OR: (111)||(0001)  [10-1]||[2-1-10]
+   p2c fit: 0.45°, 1.1°, 2.1°, 5.9° (quintiles)
+   c2c fit: 0.67°, 1.2°, 2°, 6.4° (quintiles)
+\end{lstlisting}
+        \end{onlyenv}
+              \vspace{-0.4cm}
+%         \begin{onlyenv}<2>
+% \begin{lstlisting}[style=output]
+% job2 = parentGrainReconstructor
+
+%  phase   mineral  symmetry  grains  area  reconstructed
+%  parent  gamma    m-3m      1250    97%   77%
+%  child   epsilon  6/mmm     229     2.5%
+
+%  OR: (111)||(0001)  [10-1]||[2-1-10]
+%    p2c fit: 3°, 4°, 5.7°, 10° (quintiles)
+%    c2c fit: 0.87°, 1.6°, 2.2°, 5.6° (quintiles)
+% \end{lstlisting}
+%         \end{onlyenv}
+
+        \begin{onlyenv}<2>
+\begin{lstlisting}[style=output]
+job2 = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area   reconstructed
+ parent  gamma    m-3m      1432    100%   95%
+ child   epsilon  6/mmm     47      0.23%
+
+ OR: (111)||(0001)  [10-1]||[2-1-10]
+   p2c fit: 7.6°, 9.6°, 11°, 33° (quintiles)
+   c2c fit: 1.1°, 1.1°, 1.1°, 1.1° (quintiles)
+\end{lstlisting}
+        \end{onlyenv}
+
+                \begin{onlyenv}<3>
+\begin{lstlisting}[style=output]
+job3 = parentGrainReconstructor
+
+ phase   mineral  symmetry  grains  area   reconstructed
+ parent  gamma    m-3m      1432    100%   0%
+ child   alphaP   m-3m      197     0.27%
+
+ OR: (111)||(110)  [-101]||[1-11]
+   p2c fit: 2.2°, 3.4°, 4.3°, 5.2° (quintiles)
+   c2c fit: 3.3°, 3.4°, 3.6°, 4.3° (quintiles)
+\end{lstlisting}
+        \end{onlyenv}
+
+  \end{overlayarea}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parent Grain Reconstruction}
+
+  \begin{columns}
+    \begin{column}{0.5 \textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+
+        a child orientation $\mathtt{ori}_{\mathtt{C}}$ may originate from
+        different parent orientations
+        \begin{equation*}
+          \mathtt{ori}_{\mathtt{P}} =
+          \mathtt{sym}_{\mathtt{P}} * \mathtt{p2c}^{-1} * \mathtt{sym}_{\mathtt{C}} * \mathtt{ori}_{\mathtt{C}} 
+        \end{equation*}
+
+        \structure{Challenges:}
+        \begin{itemize}
+        \item pairs of very closely oriented variants
+        \item austenite twins share many variants
+        \end{itemize}
+
+        \bigskip
+        
+        \begin{onlyenv}<2> \structure{General Approach:} For each child grain
+          select one of the parent variants such that
+
+          \medskip
+      
+          \begin{itemize}
+          \item the parent orientations form clusters of similar orientations.
+          \item the clusters have a reasonable morphology
+            % \item The morphology of a high-temperature parent phase
+            %   microstructure, typically comprising equiaxed grains.
+            % \item An annealing twin structure exhibiting a boundary
+            %   morphology typical of coherent $\Sigma 3$ related twin
+            %   boundaries \cite{Mahajan1996}.
+          \end{itemize}
+        \end{onlyenv}
+
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45 \textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+        \vspace{-1.5cm}
+        \begin{onlyenv}<1->
+          \includegraphics[width=\textwidth]{pic/childgrains.png}
+        \end{onlyenv}
+        
+        \begin{onlyenv}<2>
+          \includegraphics[width=\textwidth]{pic/parentgrains.png}
+        \end{onlyenv}
+        
+        
+      \end{overlayarea}
+     
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+  \frametitle{Comparison of the Graph and the Voting Based Approach}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \vspace{-0.3cm}
+      \structure{voting based approach}
+      \begin{itemize}
+        \setlength\itemsep{0.7em}
+      \item considers all matching pairs of potential parent orientations        
+      \item directly yields the parent orientation
+      \item different potential solutions
+      \item each child grain decides for itself      
+      \end{itemize}
+
+      \bigskip
+      
+      \structure{graph based approach}
+      \begin{itemize}
+        \setlength\itemsep{0.7em}
+      \item considers higher order neighbors
+      \item only best match counts
+      \item no direct parent orientation
+      \item may form inconsistent clusters
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+            \vspace{-0.4cm}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+        \only<1>{%
+          \input{tikz/init.tex}
+
+        \bigskip
+        \bigskip
+        
+        \input{tikz/voting1.tex}
+        }%
+      \only<2>{%
+        \input{tikz/gg1.tex}
+        
+        \input{tikz/gg2.tex}
+      }  
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+  
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The Variant Graph}
+
+  \vspace{-0.3cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.6\textwidth}
+  
+      
+      \begin{overlayarea}{\textwidth}{\textheight}
+        \begin{itemize}
+        \item is a generalization of the grain graph
+        \item nodes are the parent variants $\vec g_{n}^{i}$
+        \item edges connect parent variants if
+          \begin{itemize}
+          \item they belong to neighboring grains
+          \item have a small misorientation angle
+          \end{itemize}
+        \item contains many more nodes
+        \item but not so many more edges
+        \item contains second and third best fits
+        \end{itemize}
+
+      \begin{center}
+        \only<1>{\input{tikz/voting1.tex}}%
+        \only<2>{\input{tikz/gg1.tex}}
+      \end{center}
+        
+      \end{overlayarea}
+      
+    \end{column}
+    \begin{column}{0.38\textwidth}
+
+      \vspace{-0.8cm}
+      \input{tikz/vg1.tex}
+    \end{column}
+  \end{columns}
+  
+\end{frame}
+
+
+
+% \begin{frame}
+%   \frametitle{Clustering of the Variant Graph}
+
+
+%   \vspace{-0.5cm}
+%   \begin{columns}[T,onlytextwidth]
+%     \begin{column}{0.6\textwidth}
+  
+%       \begin{itemize}
+%       \item requires an adapted Marcovian clustering
+%       \item considers higher order neighbors
+%       \item yields consistent clusters
+%       \item directly yields the parent orientation              
+%       \item is as fast as the graph based approach
+%       \item provides probabilities for all parent variants
+%       \item allows to include morphological features
+%       \end{itemize}
+           
+%     \end{column}
+%     \begin{column}{0.38\textwidth}
+
+%       \vspace{-1cm}
+%       \begin{overlayarea}{\textwidth}{\textheight}
+%         \begin{onlyenv}<1>
+%           \input{tikz/vg1.tex}
+%         \end{onlyenv}
+%                 \begin{onlyenv}<2>
+%           \input{tikz/vg2.tex}
+%         \end{onlyenv}
+%       \end{overlayarea}
+%           \end{column}
+%   \end{columns}
+          
+% \end{frame}
+
+
+\begin{frame}
+
+
+  
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.3\textwidth}
+
+      \bigskip
+      
+      \begin{itemize}        
+      \item low-carbon lath martensite steel 
+      \item 4 million pixel
+      \item $0.5 \mu m$ spacing
+      \item half a million child grains      
+      \item runs on a laptop
+      \end{itemize}
+      
+    \end{column}
+    \begin{column}{0.65\textwidth}
+
+      \only<1>{\includegraphics[width = \textwidth]{pic/grain_map_example_large.jpg}}
+      \only<2>{\includegraphics[width = \textwidth]{pic/large_austenite_map}}%
+      
+    \end{column}
+    
+  \end{columns}
+  
+  %\includegraphics{pic/large_ausenite_map}
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{Highlights of the MTEX Implementation}
+
+  \begin{itemize}
+  \item free and open-source
+  \item fast
+  \item works for all OR-based phase transformations
+  \item works for multi-step phase transformations
+  \item includes many different parent grain reconstruction methods
+  \item modular design allows for the combination of different
+    methods
+  \item keeps track of the parent to child grain relationship trough the
+    entire reconstruction process
+  \item allows for the conditional reversion of reconstructed parent grains
+  \item allows for of geometrical criteria
+  \item its fun to play with
+  \item addon OR Tools (https://github.com/frankNiessen/ORTools) provide extended functionality
+  \end{itemize}
+
+  \pause
+  \bigskip
+
+\begin{center}
+  \Huge Thank you for your attention!
+\end{center}
+
+
+\end{frame}
+
+
+\end{document}
+
+
+
+\end{document}
+\section{Three Data Sets}
+
+\begin{frame}
+  \frametitle{The Emsland Meteorite}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{itemize}
+        \item<1-> found 1940 in a moor in Lower Saxony
+        \item<1-> 19kg, 22 × 19 × 13cm
+        \item<2-> 87\% Ferrit, 13\% Austenit
+        \item<2-> data by Gert Nolze
+        \item<3-> all Austenite from one prior grain
+        \item<4-> Ferrite has very specific texture 
+        \end{itemize}
+
+        \bigskip
+
+        \begin{center}
+          \only<3>{\includegraphics[width=4.5cm]{pic/oriParent}}
+          \only<4>{\includegraphics[width=4.5cm]{pic/oriChild}}
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{center}
+          \only<1>{\includegraphics[width=0.8\textwidth]{pic/emslandMetereoit}\vspace{0.5cm}\
+          }
+          \only<2->{%
+            \vspace{-1cm}%
+            \includegraphics[height=0.95\textheight]{pic/mapFerrite}\vspace{0.5cm}\
+          }
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A Titanium Alloy}
+
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{itemize}
+        \item data courtesy: Susanne Hemes, Aachen
+        \item 94\% alpha titanium
+        \item 0.22 \% beta titanium
+        \item 5.3\% not indexed
+        \end{itemize}
+
+        \bigskip
+
+        \begin{center}
+          \only<1>{\includegraphics[width=4.5cm]{pic/TiOriBeta}}
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \only<1>{\vspace{-0.9cm}\includegraphics[width=\textwidth]{pic/TiMap}}
+      \end{overlayarea}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{A Polycrystalline Austenite Alloy}
+
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{itemize}
+        \item data courtesy: Tuomo Nyyssönen (Finnland)
+        \item 71\% Austenite (bcc)
+        \item 29\% not indexed
+        \end{itemize}
+
+        \bigskip
+
+        \begin{center}
+          \only<1>{\includegraphics[width=4.5cm]{pic/MaOriBeta}}
+        \end{center}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.43\textwidth}
+      \begin{overlayarea}{\textwidth}{1\textheight}
+        \only<1>{\vspace{-0.9cm}\includegraphics[width=\textwidth]{pic/MaData2}}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+
+\section{Determination of the Parent to Child Orientation Relationship}
+
+
+
+\begin{frame}
+\frametitle{Ferrite - Austenite Orientation Relationships}
+
+\begin{center}
+  \only<1>{\includegraphics[width=0.95\textwidth]{pic/pfSuperposed}}
+  \only<2>{\includegraphics[width=0.95\textwidth]{pic/pfKS}}
+  \only<3>{\includegraphics[width=0.95\textwidth]{pic/pfNW}}
+  \only<4>{\includegraphics[width=0.95\textwidth]{pic/pfGT}}
+  % \only<5>{\includegraphics[width=\textwidth]{pic/pfMean}}
+  % \only<6>{\includegraphics[width=\textwidth]{pic/pfMax}}
+  % \only<7>{\includegraphics[width=\textwidth]{pic/pfIter}}
+  % \only<8>{\includegraphics[width=0.8\textwidth]{pic/moriScatter}}
+\end{center}
+
+
+  \begin{overlayarea}{\textwidth}{3cm}
+    \begin{itemize}
+    \item<2-> Kurdjumov Sachs: $(111)_{\gamma} || (011)_{\alpha}$,
+      $[\bar 101]_{\gamma}  || [\bar 1 \bar 1 1]_{\alpha}$
+    \item<3-> NishiyamaWassermann: $(111)_{\gamma} || (011)_{\alpha}$,
+      $[11\bar 2]_{\gamma}  || [0\bar 1 1]_{\alpha}$
+    \item<4-> Greninger Trojano
+    \end{itemize}
+
+  \end{overlayarea}
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{The Parent to Child Orientation Relationship}
+
+%   \begin{columns}
+%     \begin{column}{0.55\textwidth}
+%   \begin{block}{Notations}
+%       \begin{itemize}
+%       \item $\mathtt{ori_{P}}$ - parent orientation
+%       \item $\mathtt{sym_{P}}$ - parent symmetry
+%       \item $\mathtt{ori_{C}}$ - child orientation
+%       \item $\mathtt{sym_{C}}$ - child symmetry
+%     \item $\mathtt{p2c}$ - parent to child misorientation
+%     \end{itemize}
+%   \end{block}
+
+%   \vspace{-0.5cm}
+
+%       \begin{align*}
+%         \mathtt{ori_{C}}
+%         &= \mathtt{ori_{P}} \cdot \mathtt{sym_{P}} \cdot
+%           \mathtt{inv}(\mathtt{p2c}) \cdot \mathtt{sym_{C}}\\
+%         \mathtt{ori_{P}}
+%         &= \mathtt{ori_{C}} \cdot \mathtt{sym_{C}} \cdot
+%           \mathtt{p2c} \cdot \mathtt{sym_{P}}\\
+%         \mathtt{p2c}
+%         &= \mathtt{sym_{C}} \cdot \mathtt{inv}(\mathtt{ori_{C}}) \cdot
+%           \mathtt{ori_{P}} \cdot \mathtt{sym_{P}}
+%       \end{align*}
+
+%       \begin{itemize}
+%       \item $\mathtt{sym_{P}}$ describes the child variant
+%       \item $\mathtt{sym_{C}}$ describes the parent variant
+%       \end{itemize}
+%     \end{column}
+%     \begin{column}{0.4\textwidth}
+%       \only<1>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant1}}%
+%       \only<2>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant2}}%
+%       \only<3>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant3}}%
+%       \only<4>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant4}}%
+%       \only<5>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant5}}%
+%       \only<6>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant6}}%
+%       \only<7>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant7}}%
+%       \only<8>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant8}}%
+%       \only<9>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant9}}%
+%       \only<10>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant10}}%
+%       \only<11>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant11}}%
+%       \only<12>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant12}}%
+%       \only<13>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant13}}%
+%       \only<14>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant14}}%
+%       \only<15>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant15}}%
+%       \only<16>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant16}}%
+%       \only<17>{
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant17}}%
+%       \only<18>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant18}}%
+%       \only<19>{%
+%         \includegraphics[width=\textwidth]{pic/pfSingleVariant19}}%
+
+%     \end{column}
+%   \end{columns}
+
+% \end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Determining the ``True'' Orientation Relation Ship}
+
+  \begin{center}
+    \only<1>{\includegraphics[width=0.95\textwidth]{pic/pfMean}}
+    \only<2>{\includegraphics[width=0.95\textwidth]{pic/pfMax}}
+    \only<3>{\includegraphics[width=0.95\textwidth]{pic/pfIter}}
+    \only<4>{\includegraphics[width=0.85\textwidth]{pic/moriScatter.png}}
+  \end{center}
+  \begin{overlayarea}{\textwidth}{3cm}
+    \begin{itemize}
+    \item<1-3> average parent to child misorientation%: \lstinline{p2cMean = mean( inv(oriChild) * oriP )}
+    \item<2-3> maximum of misorientation distribution function
+      \uncover<4>{\paritem iterative method of T. Nyyssönen}
+    \end{itemize}
+  \end{overlayarea}
+
+% % \begin{lstlisting}[style=input]
+% % p2cMean = mean( inv(oriChild) * oriP)
+% % \end{lstlisting}
+%   \item take the maximum of the misorientation distribution function
+%     \begin{lstlisting}[style=input]
+% mdf = calcDensity( inv(oriChild) * oriP)
+% [value,p2cMax] = max(mdf)
+% \end{lstlisting}
+
+\end{frame}
+
+
+%\section{Variant Detection}
+
+\section{Identifying Child to Child Neighborships}
+
+\begin{frame}[fragile]
+  \frametitle{Identifying Child to Child Neighborships}
+
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+      \only<1>{\includegraphics[width=\textwidth]{pic/gBFit}}
+      \only<2>{\includegraphics[width=\textwidth]{pic/tPFit}}
+    \end{overlayarea}
+  \end{column}
+    \begin{column}{0.28\textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+        \only<1->{\includegraphics[width=1\textwidth]{pic/histGB}}
+        \only<2>{\includegraphics[width=1\textwidth]{pic/histTP}}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+
+% \begin{lstlisting}[style=input]
+% [parentId, fit] = calcParent(gBori,p2c,'numFit',2,'id');
+% \end{lstlisting}
+
+  % \begin{equation*}
+  %   \mathtt{fit}
+  %   = \min \angle(\mathtt{c2c}, \mathtt{p2c} \cdot \mathtt{sym_{p}}
+  %   \cdot \mathtt{inv}(\mathtt{p2c}))
+  % \end{equation*}
+
+\end{frame}
+
+% \begin{frame}[fragile,fragile]
+%   \frametitle{Identifying Child to Child Orientation Relationships at Triple
+%     Junctions}
+
+%   \begin{center}
+
+%   \end{center}
+
+% \begin{lstlisting}[style=input]
+% [parentId, fit] = calcParent(tPori,p2c,'numFit',2,'id');
+% \end{lstlisting}
+
+% \end{frame}
+
+
+\section{Parent Grain Reconstruction}
+
+\begin{frame}[fragile]
+  \frametitle{Parent Grain Reconstruction}
+  \begin{columns}%
+    \begin{column}{0.475\textwidth}%
+      \begin{overlayarea}{\textwidth}{0.95\textheight}%
+        \vspace{-0.3cm}
+        \begin{block}{orientation first - grain second}
+          \begin{enumerate}
+          \item<2-> for each child grain\\
+            \hspace{-0.8cm}\paritem collect votes for the parent orientation\\
+            \hspace{-0.8cm}\paritem majority vote decides parent orientation\\
+            \hspace{-0.8cm}\paritem turn child into parent grains
+          \item<3-> merge parent grains by orientation
+          \item<4-> merge child to parent grains
+          \end{enumerate}
+        \end{block}
+
+        \begin{block}{grain first - orientation second}
+          \begin{enumerate}
+          \item<6-> define weighted child graph
+          \item<7-> weight is fit to reference \texttt{c2c}
+          \item<8-> cut graph into clusters
+          \item<9-> clusters are parent grains
+          \item<10-> compute parent orientations
+          \item<11-> merge parent grains by orientation
+          \end{enumerate}
+        \end{block}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \only<1>{\vspace{-1cm}\includegraphics[width=\textwidth]{pic/TiMap}}
+        \only<2>{\vspace{-1cm}\includegraphics[width=\textwidth]{pic/TiParentOri}}
+        \only<3>{\vspace{-1cm}\includegraphics[width=\textwidth]{pic/TiParentMerged1}}
+        \only<4>{\vspace{-1cm}\includegraphics[width=\textwidth]{pic/TiParentMerged2}}
+        \only<5>{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/MaData}}
+        \only<6>{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/MaFit2}}
+        \only<7>{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/A}}
+        \only<8>{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/AA}}
+        \only<9>{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/grainRec}}
+        \only<10->{\vspace{-1cm}\includegraphics[width=0.94\textwidth]{pic/MaFinal}}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Critical Parameters}
+
+  \begin{block}{orientation first - grain second}
+    \begin{itemize}
+    \item grain segmentation: threshold $1.5^\circ$
+    \item child / child boundaries / triple junctions: threshold $2.5^\circ$
+    \item second best fit: lower bound $2.5^\circ$
+    \item parent orientation: minimum number of consistent votes 2
+    \item child / parent merging: misorientation threshold $2.5^{\circ}$
+    \item parent / parent merging: misorientation threshold $2.5^{\circ}$
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{grain first - orientation second}
+    \begin{itemize}
+    \item initial grain segmentation threshold $3^\circ$
+    \item clustering:\\
+      \hspace{0.4cm} method: Markovian clustering algorithm\\
+      \hspace{0.4cm} threshold: $2^{\circ}$\\
+      \hspace{0.4cm} tolerance: $1.5^{\circ}$\\
+      \hspace{0.4cm} inflation power: $p = 1.6$
+    \item grain merging: maximum misfit $5^{\circ}$, minimum number of childs
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile,fragile,fragile]
+    \frametitle{Important Commands}
+
+    parent orientation computation
+\begin{lstlisting}[style=input]
+[ParentOri, fit] = calcParent(childOri, p2c)
+[ParentOri, fit] = calcParent(childOri, p2c, 'numFit', 2)
+[ParentOri, fit] = calcParent(childOri, parentOri, p2c)
+\end{lstlisting}
+
+\bigskip
+
+    grain merging
+\begin{lstlisting}[style=input]
+[grainsMerged, childId] = merge(grains, gB)
+[grainsMerged, childId] = merge(grains, tP)
+[grainsMerged, childId] = merge(grains, M)
+[grainsMerged, childId] = merge(grains, 'threshold',delta)
+[grainsMerged, childId] = merge(grains, 'inclusions')
+\end{lstlisting}
+
+\bigskip
+
+    variant computation
+\begin{lstlisting}[style=input]
+[variantId, packetId] = calcVariant(parentOri, childOri, p2c)
+\end{lstlisting}
+
+  \end{frame}
+
+  \begin{frame}
+    \begin{center}
+      \centering{\Huge Thank You for Your Attention!}
+    \end{center}
+
+    \vspace{1cm}
+
+    \begin{center}
+      More information, scripts, data at \\ \medskip \url{mtex-toolbox.github.io/}
+    \end{center}
+
+    \vspace{1cm}
+
+    % \begin{center}
+    %   MTEX Workshop 2021 - online, in February
+    % \end{center}
+
+
+  \end{frame}
+
+\end{document}

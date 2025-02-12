@@ -1,0 +1,13 @@
+*.synctex.gz
+*.snm
+*.toc
+*.vrb
+*.out
+*.nav
+*.log
+*.aux
+*~
+*.auxlock
+*.dpth
+*.md5
+*.dep

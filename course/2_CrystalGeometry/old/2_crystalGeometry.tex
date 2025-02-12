@@ -1,0 +1,930 @@
+% presentation
+%\documentclass[compress,draft]{beamer}
+\documentclass[compress,aspectratio=1610]{beamer}
+% handout
+%\documentclass[compress,aspectratio=169,handout]{beamer}
+
+\usepackage{../mtex,fancyvrb,booktabs,multicol}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{angles,quotes}
+%\tikzexternalize[prefix=tikz/]
+%\usepackage{subfigure}
+\usepackage[labelformat=empty]{subcaption}
+\usepackage{tikz/tikzlattice}
+\usepackage{tikz-3dplot}
+\captionsetup{compatibility=false}
+%\usepackage[inline]{enumitem}
+\newcommand\paraitem{%
+  \;
+  \makebox[\labelwidth][r]{%
+    \makelabel{%
+      \usebeamertemplate{itemize \beameritemnestingprefix item}}}\hskip\labelsep}
+
+
+%\newcommand<>{\underline}[1]{{\only#2{\itshape}#1}}
+
+\definecolor{MTEX1}{rgb}{0.1216,0.4667,0.7059}
+\definecolor{MTEX2}{rgb}{1.0000,0.4980,0.0549}
+\definecolor{MTEX3}{rgb}{0.1725,0.6275,0.1725}
+\definecolor{MTEX4}{rgb}{0.8392,0.1529,0.1569}
+\definecolor{MTEX5}{rgb}{0.5804,0.4039,0.7412}
+\definecolor{MTEX6}{rgb}{0.5490,0.3373,0.2941}
+
+\definecolor{Matlab1}{rgb}{     0, 0.4470, 0.7410}
+\definecolor{Matlab2}{rgb}{0.8500, 0.3250, 0.0980}
+\definecolor{Matlab3}{rgb}{0.9290, 0.6940, 0.1250}
+\definecolor{Matlab4}{rgb}{0.4940, 0.1840, 0.5560}
+\definecolor{Matlab5}{rgb}{0.4660, 0.6740, 0.1880}
+\definecolor{Matlab6}{rgb}{0.3010, 0.7450, 0.9330}
+\definecolor{Matlab7}{rgb}{0.6350, 0.0780, 0.1840}
+
+\author{R. Hielscher}
+
+\title{Lecture 2 - Crystal Geometry}
+
+\institute{Faculty of Mathematics and Computer Science,\\
+	TU Bergakademie Freiberg, Germany}
+% \usepackage{ulem}
+% \renewcommand<>{\sout}[1]{
+%   \alt#2{\beameroriginal{\sout}{#1}}{#1}
+% }
+
+\renewcommand<>{\ul}[1]{
+  \alt#2{\underline{#1}}{#1}
+}
+
+\date{MTEX Workshop 2024}
+
+%\includeonlyframes{current}
+
+\begin{document}
+
+
+
+\begin{frame}
+  \maketitle{}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Table of Content}
+
+% \tableofcontents{}
+
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Crystals}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+
+      \begin{overlayarea}{\textwidth}{\textheight}
+        \begin{Definition}
+          A crystal is an anisotropic, homogenous body consisting of a
+          three-dimensional periodic ordering of atoms, ions or molecules.
+        \end{Definition}
+
+        \bigskip
+
+        \begin{onlyenv}<2->
+          \structure{Consequence:} There are linearly
+          independent vectors $\vec a$, $\vec b$, $\vec c$ such that the
+          atomic structure is invariant with respect to translations about
+          these vectors.
+
+          \bigskip
+
+          \begin{itemize}
+          \item The definition of periodicity assumes infinity of the atomic
+            structure.
+          \item The choice of the vectors $\vec a$, $\vec b$, $\vec c$ is not
+            unique
+          \end{itemize}
+        \end{onlyenv}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      %\vspace{-0.75cm}
+      \begin{overlayarea}{\textwidth}{\textheight}
+        \begin{center}
+          % \input{tikz/3dlattice}
+          \begin{lattice}{3}{6}{2}
+            \begin{onlyenv}<2>
+              \unitCell{0}
+            \end{onlyenv}
+          \end{lattice}
+        \end{center}
+      \end{overlayarea}
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The Unit Cell}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{\textheight}
+      \begin{itemize}
+      \item is the parallelepiped spanned by $\vec a$, $\vec b$,
+        $\vec c$.
+      \item is the smallest region that constitutes a repeating pattern.
+      \item is characterized by the length and angles
+        \begin{align*}
+          a &= |\vec a|,\;  b = |\vec b|, \;c = |\vec c|\\
+          \alpha &= \angle(\vec b,\vec c), \;
+          \beta = \angle(\vec a,\vec c),\;
+          \gamma = \angle(\vec b,\vec a).
+        \end{align*}
+      \end{itemize}
+
+      \vspace{-0.3cm}
+\begin{lstlisting}[style=input]
+abc = [5.2, 5.2, 5.3]
+abg = [90 99.25 90] * degree;
+cs = crystalSymmetry('1',abc,abg)
+\end{lstlisting}
+      \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans = /+crystalSymmetry+/
+  symmetry          : 1
+  a, b, c           : 5.2, 5.2, 5.3
+  alpha, beta, gamma: 90, 99.25, 90
+\end{lstlisting}
+    \end{overlayarea}
+  \end{column}
+  \begin{column}{0.45\textwidth}
+    \begin{overlayarea}{\textwidth}{\textheight}
+
+      \begin{center}
+        \begin{lattice}{3}{6}{2}
+          \unitCell{0}
+        \end{lattice}
+      \end{center}
+    \end{overlayarea}
+  \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The Crystal Coordinate Systems}
+
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{\textheight}
+        The vectors $\vec a$, $\vec b$, $\vec c$ constitute a right handed but
+        non orthogonal coordinate system.
+
+        \medskip
+
+        \structure{Lattice points} are given by coordinates
+        $u, v, w$:
+        \begin{equation*}
+          \structure{\cdot uvw\cdot} = \vec d = u \vec a + v \vec b + w \vec c.
+        \end{equation*}
+        \structure{Usage:} slip systems, dislocation systems
+\begin{lstlisting}[style=input]
+d = Miller(1,1,0,cs,'uvw')
+\end{lstlisting}
+        \begin{onlyenv}<1|handout:0> \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+d = /+Miller+/ (/+1+/)
+  u  v  w
+  1  1  0
+\end{lstlisting}
+          Smaller integers $u$, $v$, $w$ indicate higher density of lattice
+          points on the line and larger distance between parallel lines.
+        \end{onlyenv}
+
+        \medskip
+
+        \begin{onlyenv}<2-> \structure{Lattice directions $[uvw]$:} all vectors
+          parallel to $\vec d$
+
+\begin{lstlisting}[style=input]
+d == [2*d, -d]
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2|handout:0> \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans =
+
+   1   0
+\end{lstlisting}
+          \end{onlyenv}
+          \begin{onlyenv}<3->
+            \vspace{-0.3cm}
+\begin{lstlisting}[style=input]
+[abs(d), norm(2*d)]
+\end{lstlisting}
+          \end{onlyenv}
+          \begin{onlyenv}<3|handout:0> \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans =
+
+    1.4142    2.8284
+\end{lstlisting}
+          \end{onlyenv}
+          \begin{onlyenv}<4->
+            \medskip
+            \structure{Examples:} $[1 0 0]$,
+          $[1 \overline 1 0] = [2 \overline 2 0] \ne [\overline 1 1 0]$
+        \end{onlyenv}
+
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{overlayarea}{\textwidth}{\textheight}
+        \begin{onlyenv}<1->
+          \begin{center}
+            \begin{lattice}{3}{6}{2}
+              \unitCell{0}
+              \latticeVector{2}{3}{1}
+            \end{lattice}
+          \end{center}
+        \end{onlyenv}
+          \end{overlayarea}
+        \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The Reciprocal Coordinate System}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+        The reciprocal axes are orthogonal to $\vec a, \vec b, \vec c$,
+        \begin{equation*}
+          \vec a^{*} = \frac{\vec b \times \vec c}{V}, \;
+          \vec b^{*} = \frac{\vec c \times \vec a}{V}, \;
+          \vec c^{*} = \frac{\vec a \times \vec b}{V}
+        \end{equation*}
+
+
+
+        %\medskip
+
+        %\structure{Properties:}
+
+        \begin{itemize}
+         \item $V = \vec a \cdot (\vec b \times \vec c)$ is the volume of the unit
+          cell
+        \item $\vec a \cdot \vec a^{*} = 1$, $\vec b \cdot \vec b^{*} = 1$, $\vec c \cdot \vec c^{*} = 1$
+        \item units of $\vec a^{*}$, $\vec b^{*}$, $\vec c^{*}$ are reciprocal
+          to $\vec a, \vec b, \vec c$
+        \item for cubic lattices $\vec a || \vec a^{*}$, $\vec b || \vec b^{*}$, $\vec c || \vec c^{*}$,
+        \end{itemize}
+
+        \medskip
+
+        Directions with respect to the $\vec a^{*}, \vec b^{*}, \vec c^{*}$ are given
+        by integers coordinates $h$, $k$, $\ell$
+
+  \begin{equation*}
+    \vec n = h \vec a^{*} + k \vec b^{*} + \ell c^{*}
+  \end{equation*}
+
+% \begin{lstlisting}[style=input]
+% n = Miller(1,1,0,cs,'hkl')
+% \end{lstlisting}
+%   \vspace{-0.3cm}
+% \begin{lstlisting}[style=output]
+% d = /+Miller+/
+%  symmetry: 1
+%   h 1
+%   k 1
+%   l 0
+% \end{lstlisting}
+\end{overlayarea}
+
+\end{column}
+\begin{column}{0.45\textwidth}
+  \begin{overlayarea}{\textwidth}{\textheight}
+    \begin{center}
+      \begin{lattice}{3}{6}{2}
+        \unitCell{0}
+
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} -> +
+        \reciprocalVector{3}{0}{0} node[right] {$\vec{a}^{*}$};
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} ->
+        + \reciprocalVector{0}{3}{0} node[above] {$\vec{b}^{*}$};
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} ->
+        + \reciprocalVector{0}{0}{3} node[right] {$\vec{c}^{*}$};
+
+      \end{lattice}
+    \end{center}
+  \end{overlayarea}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The Reciprocal Coordinate System}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{0.8\textheight}
+\begin{lstlisting}[style=input]
+n = Miller(1,1,0,cs,'hkl')
+\end{lstlisting}
+        \vspace{-0.3cm}
+        \begin{onlyenv}<1|handout:0>
+\begin{lstlisting}[style=output]
+d = /+Miller+/ (/+1+/)
+  h  k  l
+  1  1  0
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2->
+\begin{lstlisting}[style=input]
+Miller({1,1,0},{0,1,1},cs,'hkl')
+\end{lstlisting}
+        \end{onlyenv}
+        \vspace{-0.3cm}
+        \begin{onlyenv}<2|handout:0>
+\begin{lstlisting}[style=output]
+ans = /+Miller+/  (/+1+/)
+  h  k  l
+  1  1  0
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<3->
+\begin{lstlisting}[style=input]
+rec = [cs.aAxisRec,cs.bAxisRec,...
+       cs.cAxisRec]
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<4->
+\begin{lstlisting}[style=input]
+dot(rec,cs.aAxis)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<4|handout:0>
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans =
+
+     1     0     0
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<5->
+\begin{lstlisting}[style=input]
+cross(cs.aAxisRec,cs.bAxisRec)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<5|handout:0>
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans = /+Miller+/  (/+1+/)
+  u  v  w
+  0  0  1
+\end{lstlisting}
+        \end{onlyenv}
+
+\end{overlayarea}
+
+\end{column}
+\begin{column}{0.45\textwidth}
+  \begin{overlayarea}{\textwidth}{\textheight}
+    \begin{center}
+      \begin{lattice}{3}{6}{2}
+        \unitCell{0}
+
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} -> +
+        \reciprocalVector{3}{0}{0} node[right] {$\vec{a}^{*}$};
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} ->
+        + \reciprocalVector{0}{3}{0} node[above] {$\vec{b}^{*}$};
+        \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} ->
+        + \reciprocalVector{0}{0}{3} node[right] {$\vec{c}^{*}$};
+
+      \end{lattice}
+    \end{center}
+  \end{overlayarea}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Crystal Lattice Planes}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{0.95\textheight}
+        \begin{onlyenv}<1-> The plane $P$ normal to
+          $\vec n = h \vec a^{*} + k \vec b^{*} + \ell c^{*}$ is
+          \begin{equation*}
+            P = \{\vec x \mid \vec x \cdot \vec n = d \} = \structure{(hk\ell)}.
+          \end{equation*}
+          It intersects the $\vec a$-axis in $\cdot u00 \cdot$ if
+          \begin{equation*}
+            d = u \vec a \cdot n
+            = u \vec a \cdot (h \vec a^{*} + k \vec b^{*} + \ell c^{*}) = u h.
+          \end{equation*}
+        \end{onlyenv}%
+        \begin{onlyenv}<2-> Hence, $(hk\ell)$ intersects $\vec a$, $\vec b$ and
+          $\vec c$ in \structure{$\frac{d}{h},\, \frac{d}{k},\, \frac{d}{\ell}.$}
+        \end{onlyenv}
+
+        \bigskip
+
+        \begin{onlyenv}<3-> Given axes intersections $m, n, p \in \mathbb
+          N$. The corresponding normal vector is
+          \begin{equation*}
+            \vec n = \tfrac{d}{m} \vec a^{*} +  \tfrac{d}{n}  \vec b^{*} + \tfrac{d}{p}  \vec c^{*}
+          \end{equation*}
+          with $d = \mathrm{LCM}(m, n, p)$.
+        \end{onlyenv}
+
+        \medskip
+
+        \begin{onlyenv}<4->
+          $k = 0 \iff \frac{1}{0} = \infty \iff (hkl)$ is parallel to $\vec b$
+        \end{onlyenv}
+
+
+      \end{overlayarea}
+
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{overlayarea}{\textwidth}{\textheight}
+          \begin{center}
+            \begin{lattice}{3}{6}{2}
+
+              \begin{onlyenv}<1-3>
+                \draw[->, >=latex, ultra thick] \latticePoint{0}{0}{0} -> +
+                \reciprocalVector{4}{2}{6} node[right, fill=white] {$\vec{n}=(213)$};
+
+                \filldraw[fill=red!20,draw=red!40!black,opacity=0.5]
+                \latticePoint{3}{0}{0} -- \latticePoint{0}{0}{2} --
+                \latticePoint{0}{6}{0} -- cycle;
+
+                \draw[-, ultra thick] \latticePoint{0}{0}{0} -> +
+                \reciprocalVector{2}{1}{3};
+              \end{onlyenv}
+
+              \begin{onlyenv}<4|handout:0>
+
+                \draw[->, >=latex, ultra thick] \latticePoint{0}{2}{0} -> +
+                \reciprocalVector{2}{0}{0} node[right, fill=white]
+                {$\vec{n}=(100)$};
+
+                \filldraw[fill=red!20,draw=red!40!black,opacity=0.5]
+                \latticePoint{1}{0}{0} -- \latticePoint{1}{0}{2} --
+                \latticePoint{1}{6}{2} --
+                \latticePoint{1}{6}{0} -- cycle;
+
+              \end{onlyenv}
+
+              \begin{onlyenv}<5|handout:0>
+
+                \draw[->, >=latex, ultra thick] \latticePoint{0}{0}{0} -> +
+                \reciprocalVector{0}{2}{0} node[above, fill=white]
+                {$\vec{n}=(010)$};
+
+                \filldraw[fill=red!20,draw=red!40!black,opacity=0.5]
+                \latticePoint{0}{1}{0} -- \latticePoint{3}{1}{0} --
+                \latticePoint{3}{1}{2} --
+                \latticePoint{0}{1}{2} -- cycle;
+
+              \end{onlyenv}
+
+
+
+              % \filldraw[fill=red!20,draw=red!40!black,opacity=0.5] (\dax*3,0,0) --
+              % (\daz*2,0,2) -- (\day*6,\dby*6,0) -- cycle;
+
+            \end{lattice}
+          \end{center}
+        \end{overlayarea}
+      \end{column}
+    \end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Miller Indices}
+%  \left<hk\ell\right>
+
+    \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{0.95\textheight}
+          The lattice plane $(123)$ perpendicular to
+  $\vec n = \vec a^{*} + 2 \vec b^{*} + 3 \vec c^{*}$ which intersects the
+  direct lattice axes $\vec{a}$, $\vec{b}$ and $\vec{c}$ at $1$, $\tfrac12$ and
+  $\tfrac13$.
+
+  \begin{itemize}
+  \item The coordinates $h$, $k$, $\ell$ are the \structure{Miller indices} of the plane $P$.
+  \item planes $(hk\ell)$ parallel to $\vec a$ have interception point
+    $\frac{1}{\infty}$ and hence $h=0$
+  \item planes $(h 0 0)$ perpendicular to $\vec a^{*}$ have interception
+    points $(\frac{d}{h},\frac{1}{\infty},\frac{1}{\infty})$
+  \end{itemize}
+
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{overlayarea}{\textwidth}{\textheight}
+          \begin{center}
+            \begin{lattice}{3}{6}{2}
+
+              % \filldraw[fill=red!20,draw=red!40!black,opacity=0.5] (\dax*3,0,0) --
+              % (\daz*2,0,2) -- (\day*6,\dby*6,0) -- cycle;
+
+            \end{lattice}
+          \end{center}
+        \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{The Zone Equation}
+
+  \begin{columns}
+    \begin{column}{0.52\textwidth}
+      \begin{overlayarea}{\textwidth}{0.9\textheight}
+        \begin{onlyenv}<1-> A direction $[uvw]$ is parallel to a plane
+          $(hk\ell)$ if
+          \begin{equation*}
+            h u + k v + \ell w = 0.
+          \end{equation*}
+        \end{onlyenv}
+
+        \medskip
+
+        \begin{onlyenv}<3-> The plane $(hkl)$ spanned by the directions
+          $[u_{1}v_{1}w_{1}]$ and $[u_{2}v_{2}w_{2}]$:
+          \begin{equation*}
+            (hkl) = [u_{1}v_{1}w_{1}] \times [u_{2}v_{2}w_{2}]
+          \end{equation*}
+        \end{onlyenv}
+        \medskip
+
+        \begin{onlyenv}<4-> The common direction $[uvw]$ of two planes
+          $(h_{1}k_{1}\ell_{1})$ and $(h_{2}k_{2}\ell_{2})$
+          \begin{equation*}
+            [uvw] = (h_{1}k_{1}\ell_{1}) \times (h_{2}k_{2}\ell_{2})
+          \end{equation*}
+        \end{onlyenv}
+
+      \end{overlayarea}
+
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{overlayarea}{\textwidth}{0.95\textheight}
+        \begin{onlyenv}<1->
+\begin{lstlisting}[style=input]
+d1 = Miller(1,-1,2,cs,'uvw')
+n1 = Miller(1,1,0,cs,'hkl')
+dot(d1,n1)
+\end{lstlisting}
+        \end{onlyenv}
+        \vspace{-0.3cm}
+        \begin{onlyenv}<1|handout:0>
+\begin{lstlisting}[style=output]
+ans =
+
+   7.7716e-16
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2->
+\begin{lstlisting}[style=input]
+angle(n1,d2) ./ degree
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<2|handout:0>
+\begin{lstlisting}[style=output]
+ans =
+
+   90.0000
+\end{lstlisting}
+        \end{onlyenv}
+
+        \begin{onlyenv}<3->
+\begin{lstlisting}[style=input]
+d2 = Miller(1,0,0,cs,'uvw')
+cross(d1,d2)
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<3|handout:0>
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans = /+Miller+/ (/+1+/)
+  h  k  l
+  0  2  1
+\end{lstlisting}
+        \end{onlyenv}
+        \begin{onlyenv}<4->
+\begin{lstlisting}[style=input]
+n2 = Miller(1,0,0,cs,'hkl')
+cross(n1,n2)
+\end{lstlisting}
+          \vspace{-0.3cm}
+\begin{lstlisting}[style=output]
+ans = /+Miller+/ (/+1+/)
+ u  v  w
+ 0  0 -1
+\end{lstlisting}
+        \end{onlyenv}
+      \end{overlayarea}
+
+
+
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Morphology}
+
+  Crystals are formed by crystallization from a solution or a melt.
+
+  the two steps of crystallization:    nucleation and growth
+
+  \pause
+
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+
+      \begin{itemize}
+      \item<+-> the grow rate is an anisotropic property
+      \item<+-> lattice planes with high grow rate get smaller
+      \item<+-> lattice planes with low grow rate become larger
+      \item<+-> lattice planes $(hk\ell)$ with small Miller indices usually have high
+        density and grow slowly
+      \item<+-> the shape of a crystal is formed by its low index lattice planes
+      \item<+-> law of constant dihedral angles
+      \end{itemize}
+
+      \begin{lstlisting}[style=input]
+cs = crystalSymmetry.load('quartz.cif')
+cS = crystalShape.quartz;
+plot(cS,'colored')
+      \end{lstlisting}
+
+      
+    \end{column}
+    \begin{column}{0.3\textwidth}
+
+      \begin{center}
+        \begin{onlyenv}<1-6>
+          \includegraphics[width=\textwidth]{pic/quartzMiller}
+        \end{onlyenv}
+        \begin{onlyenv}<7-|handout:0>
+          \includegraphics[width=0.85\textwidth]{pic/quartzMillerColor}
+        \end{onlyenv}
+      \end{center}
+
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+% \begin{frame}[fragile]
+%   \frametitle{Crystal Shapes in MTEX}
+
+%   \begin{overlayarea}{\textwidth}{0.8\textheight}
+% \begin{lstlisting}[style=input]
+% cs = crystalSymmetry.load('Mg-Magnesium.cif')
+% \end{lstlisting}
+
+%     \begin{only}<1>
+% \begin{lstlisting}[style=output]
+% cs = crystalSymmetry (show methods, plot)
+
+%   mineral        : Mg
+%   symmetry       : 6/mmm
+%   elements       : 24
+%   a, b, c        : 3.2, 3.2, 26
+%   reference frame: X||a*, Y||b, Z||c*
+% \end{lstlisting}
+%     \end{only}
+
+% \begin{lstlisting}[style=input]
+% cS = crystalShape.hex(cs)
+% \end{lstlisting}
+% \begin{lstlisting}[style=output]
+% cS = crystalShape (show methods, plot)
+%  mineral: Mg (6/mmm, X||a*, Y||b, Z||c*)
+%  vertices: 12
+%  faces: 8
+% \end{lstlisting}
+
+%   \end{overlayarea}
+% \end{frame}
+
+
+\begin{frame}
+  \frametitle{The Crystal Planes of Quartz  in a Stereographic Projection}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{pic/proj3d.png}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \begin{itemize}
+      \item[\textcolor{Matlab1}{c}] \structure{c-axis:} \\
+        $(0001)$, $(000\overline{1})$
+      \item[\textcolor{Matlab6}{m}] \structure{hexagonal prism:} \\
+        $(10\overline{1}0)$, $(01\overline{1}0)$,$(1\overline{1}00)$\\
+        $(\overline{1}010)$, $(0\overline{1}10)$,$(\overline{1}100)$\\
+      \item[\textcolor{Matlab2}{r}] \structure{positive rhomboeder:}
+        $(10\overline{1}1$, $(\overline{1}101)$, $(0\overline{1}11)$
+      \item[\textcolor{Matlab3}{z}] \structure{negative rhomboder:}
+        $(1\overline{1}01)$,$(01\overline{1}1)$,$(\overline{1}011)$
+      \item[\textcolor{Matlab4}{s}] \structure{trigonal bipyramid:}
+        $(11\overline{2}1)$, $(1\overline{2}11)$, $(\overline{2}111)$
+      \item[\textcolor{Matlab5}{x}] \structure{positive trapezohedron:}
+        $(51\overline{6}1)$, $(\overline{6}511)$, $(1\overline{6}51)$
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+
+
+% \begin{frame}
+%   \frametitle{Crystals Structure}
+
+%   \begin{center}
+%     \input{tikz/3dlattice}
+%   \end{center}
+
+%   \begin{center}
+%     crystals structure = basis + lattice
+%   \end{center}
+
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Crystals Structure}
+
+%   \begin{center}
+%     \includegraphics[width=\textwidth]{pic/fccbcc.png}
+%   \end{center}
+
+%   \begin{center}
+%     crystals structure = basis + lattice
+%   \end{center}
+
+% \end{frame}
+
+
+
+
+
+
+
+
+\end{document}
+
+
+\documentclass[border=0.125cm]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+\def\radius{6}
+\def\Alpha{20}
+\def\Beta{20}
+\def\Gamma{20}
+
+\begin{document}
+
+
+\tdplotsetmaincoords{70}{150}
+
+\tikzset{% Some styles. More could be done.
+    axis/.style={very thick, fill=white, -*, shorten >=-3pt},
+    axis'/.style={thick, -},
+    axis''/.style={thick, -},
+    Axis/.style={very thick, fill=black, -*, shorten >=-3pt},
+    behind lines/.style={loosely dashed}
+}
+
+\begin{tikzpicture}[tdplot_main_coords]
+
+\begin{scope}[scale=\radius, every path/.style={tdplot_rotated_coords}]
+
+% Back half of the white circle.
+\tdplotsetrotatedcoords{\Alpha}{0}{0}
+\draw  [fill=white]
+    plot    [domain=90:270, samples=100] (cos \x, sin \x) -- cycle;
+
+% The light gray circle
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\draw  [fill=gray!20]
+    plot    [domain=0:360, samples=100] (cos \x, sin \x);
+
+% The dashed edge of the back half of the white circle
+\begin{scope}
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\path  [clip]
+    plot    [domain=0:360, samples=100] (cos \x, sin \x);
+
+\tdplotsetrotatedcoords{\Alpha}{0}{0}
+\draw  [behind lines]
+    plot    [domain=90:270, samples=100] (cos \x, sin \x);
+\end{scope}
+
+% The upper (unfilled) semi circles
+\tdplotsetrotatedcoords{\Alpha}{90}{0}
+\draw [domain=90:270, samples=100] plot (cos \x, sin \x);
+\tdplotsetrotatedcoords{\Alpha+90}{90}{0}
+\draw [domain=90+\Beta:270+\Beta, samples=100] plot (cos \x, sin \x);
+
+
+% The dark gray sector
+\tdplotsetrotatedcoords{\Alpha-90}{-90}{90}
+\draw [fill=gray, thick, domain=0:\Beta]
+    (0,0) -- plot (cos \x, sin \x) -- cycle;
+
+% The X axis
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\draw[Axis] (0,0,0) -- (1,0,0) node [below left] {$X$};
+
+% The x'' axis
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{0}
+\draw[axis'] (0,0,0) -- (1,0,0) node [below left] {$x''$};
+
+% The front half of the white circle
+\tdplotsetrotatedcoords{\Alpha}{0}{0}
+\draw  [fill=white]
+    plot [domain=-90:0, samples=100] (cos \x, sin \x)
+    .. controls (0.125*cos 22.5, 0.125*sin 22.5) ..
+    (cos 45, sin 45) -- plot    [domain=45:90, samples=100] (cos \x, sin \x)
+    -- cycle;
+
+% The dashed lines in the front half of the white circle
+\begin{scope}
+\tdplotsetrotatedcoords{\Alpha}{0}{0}
+\path  [clip]
+    plot [domain=-90:0, samples=100] (cos \x, sin \x)
+    .. controls (0.125*cos 22.5, 0.125*sin 22.5) ..
+    (cos 45, sin 45) -- plot    [domain=45:90, samples=100] (cos \x, sin \x)
+    -- cycle;
+
+\tdplotsetrotatedcoords{\Alpha-90}{-90}{90}
+\draw [behind lines] (0,0) -- (cos \Beta, sin \Beta);
+
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\draw [behind lines] (0,0,0) -- (1,0,0);
+
+\end{scope}
+
+
+% Axes x, y, z
+\tdplotsetrotatedcoords{0}{0}{0}
+\draw[axis] (0,0,0) -- (1,0,0) node [below left]  {$x$};
+\draw[axis] (0,0,0) -- (0,1,0) node [below right] {$y$};
+\draw[axis] (0,0,0) -- (0,0,1) node [above=0.1cm] {$z=z'$};
+
+% Axis x'
+\tdplotsetrotatedcoords{\Alpha}{0}{0}
+\draw[axis] (0,0,0) -- (1,0,0) node [below left] {$x'$};
+
+% Axes Y
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\draw[Axis] (0,0,0) -- (0,1,0) node [right] {$Y$};
+% Axes z' and Z
+\draw[Axis] (0,0,0) -- (0,0,1) node [left=0.1cm] {$z''=Z$};
+
+% Axes y' and y''
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{0}
+\draw[axis'] (0,0,0) -- (0,1,0) node [below right] {$y'=y''$};
+
+% Arrows
+\tdplotsetrotatedcoords{0}{0}{0}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{0}{\Alpha}{below left=0cm}{$\alpha$}
+\tdplotsetrotatedcoords{\Alpha+90}{90}{0}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{-90}{-90+\Beta}{left}{$\beta$}
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{-\Gamma}{0}{below}{$\gamma$}
+
+\tdplotsetrotatedcoords{0}{0}{0}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{90}{90+\Alpha}{above left=0cm}{$\alpha$}
+\tdplotsetrotatedcoords{\Alpha+90}{90}{0}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{-180}{-180+\Beta}{above}{$\beta$}
+\tdplotsetrotatedcoords{\Alpha}{\Beta}{\Gamma}
+\tdplotdrawarc[-latex]{(0,0,0)}{0.8}{90-\Gamma}{90}{left}{$\gamma$}
+
+\end{scope}
+
+\end{tikzpicture}
+
+\end{document}

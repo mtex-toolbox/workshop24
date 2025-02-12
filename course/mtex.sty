@@ -1,0 +1,187 @@
+
+\mode<beamer>{
+  \usetheme{boxes}
+  \mode<presentation>
+}
+
+\mode<handout>{
+  \usepackage{pgfpages}
+  \pgfpagesuselayout{2 on 1}[a4paper]
+}
+\usepackage{fancyvrb}
+
+% layout settings
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left = 4mm}
+\setbeamersize{text margin right = 4mm}
+
+% other packages
+%\usetheme[Boadilla]{}
+\usepackage{calc}
+\usepackage{stmaryrd}
+%
+
+\usepackage{booktabs}
+%\useinnertheme{rounded}
+\usecolortheme{dolphin}
+\usecolortheme{rose}
+%\setbeamercolor{title}{fg=black,bg=white!80!black}
+\setbeamercolor{title}{fg=black,bg=white!80!blue}
+\usefonttheme[onlysmall]{structurebold}
+%\setbeamercovered{invisible}
+\setbeamercovered{transparent}
+
+
+\usepackage{colortbl}
+
+\usepackage{listings}
+
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{lightergray}{gray}{0.92}
+\definecolor{mygreen}{rgb}{0.1,0.9,0.3}
+\definecolor{commentgreen}{rgb}{0.3,1,0.5}
+
+\newcommand{\mycirc}{\;\tikz[baseline=-0.5ex] \draw[fill=blue!70!black] (0,0)
+  circle[radius=1.5pt];\!}
+
+\definecolor{lightgray}{gray}{0.9} \lstset{backgroundcolor=\color{lightgray}}
+\lstdefinelanguage{rock}{morekeywords=
+  {plotFourier,calcPoleFigure,correct,intensities,isOutlier,round2Miller,gradientX,CSL,
+    burger,GOS,mis2mean,calcGROD,plotAxisDistribution,axisAngleKey,grainMean,
+   variants,calcVariantId,calcParent, mean,std,hist,save,load,rotate,min,max,get,tensor,id,Rodrigues,homochoric,cubochoric,plotPDF,plotIPDF,Goss,
+scale,union,delete,degree,kernel,gethw,getparameter,bandwidth,
+symmetry,Miller,Miller2quat,uniformODF,unimodalODF,fibreODF,xvector,yvector,zvector,
+loadPoleFigure,PoleFigure,plot,plotpdf,plotipdf,calcODF,calcKernel,calcTensor,calcMDF,calcMisorientation,
+vector3d,cross,norm, abs, dot,sum,savefigure,plotDiff,calcerror,
+quaternion,idquaternion,dist,Laue,length,angle,angle_outer,add,subGrid,refine,GridLength,getResolution,getRho,
+polar,S2Grid,santafee,mix2,modalorientation,fourier,textureindex,entropy,volume,
+surface, fibrevolume,uiimport,scatter,cif2symmetry,remove_outlier,
+simulatePoleFigure,SimulateEBSD,grainfun,hold,getFundamentalRegion,symvec,
+FourierODF,find_outlier,bar,hasholes,principalcomponents,
+hullprincipalcomponents,loadEBSD,calcGrains,plotboundaries,plotodf,plotspatial,area,
+aspectratio,grain,grainfun,grainsize,get,plotgrains,plotellipse,plotsubfractions,plotboundary,
+hasholes,hassubfraction,hullarea,hullcentroid,hullperimeter,centroid,borderlength,
+deltaarea,equivalentperimeter,perimeter,joincount,link,misorientation,neighbours,
+paris,shapefactor,toebsd,rotation,axis,Euler,symmetrise,orientation,eq,inverse,BinghamODF,
+project2FundamentalRegion,annotate,plotAngleDistribution,volumeCompressibility,
+YoungsModulus, shearModulus, linearCompressibility, ChristoffelTensor,
+velocity,
+PoissonRatio,plotx2north,plotx2east,plotx2west,plotx2south,plotzOutOfPlane,plotzIntoPlane,setMTEXpref,import,loadOrientation,
+plota2north,plota2east,plota2west,plota2south,plotb2north,plotb2east,plotb2west,plotb2south,
+loadVector3d,brassOrientation,double,EinsteinSum,directionalMagnitude,inv,sqrt,SchmidTensor,find,isnull,calcShearStress,contourf,colorbar,
+crystalSymmetry,specimenSymmetry,loadCIF,loadPHL,orth,randv,isImproper,dspacing,round,properGroup,properSubGroup,export,
+mtexColorMap,KAM,fliplr,flipud,rand,mtexColorbar,ipdfHSVOrientationMapping,Miller2Color,quiver,calcDensity,reflection,
+dispStyle,brass,plotSection,orientationRegion,fundamentalRegion,minAngle,maxAngle,calcAxisDistribution,calcAngleDistribution,axisSector,checkInside,
+fibre,fit,goss,crystalShape,quartz,meanOrientation,byMatrix,byEuler,byPolar,byMiller,byAxisAngle,normalize,orth,HSVDirectionKey, direction2color,mirroring,
+matrix,map,linspace,transformReferenceFrame,slipSystem,byElements,numSym,aAxis,bAxis,cAxis,aAxisRec,bAxisRec,cAxisRec,
+dislocationSystem, ODF, beta, multiplicity,regularSO3Grid,equispacedSO3Grid,export_VPSC,
+unique,fundamentalSector,equispacedS2Grid,inversion,size,poly,boundary,innerBoundary,smooth,hasHole,innerBoundary,boundarySize,surf,contour,plot3d,grad,alpha,
+discreteSample,importdata, interp, S2FunHarmonic, SO3FunHandle,
+SO3FunHarmonic, SO3FunRBF,
+quadrature,eval,stressTensor,uniaxial,piezoElectricityTensor,orientations,leviCivita,dyad,
+sym, antiSym, svd, eig, diag, det, trace, sqrtm, expm,diag, det, norm, trace,
+sqrtm, expm,eye, ones, zeros, stiffnessTensor,
+complianceTensor,bulkModulus,for,end,while,
+velocityGradientTensor,pureShear,spin,simpleShear,logm,fcc,bcc,SchmidFactor,plotS2Grid,strainTensor,calcTaylor,deformationGradientTensor,calcDensity,calcPDF,calcIPDF,calcComponents,pyramidalA,calcParent2Child,GreningerTrojano,NishiyamaWassermann,
+curvature,
+dislocationDensity,fitDislocationSystems,cumsum,merge,triplePoints,EBSD,bcc,fcc,slipSystem,inversePoleFigureDirection,ipfHSVKey,orientation2color,grainId,oriRef,
+fitEllipse,aspectRatio,longAxis,axisAngleColorKey},
+sensitive=true, morestring=[b][\emph]', moredelim=[is][\alert]{/+}{+/},
+moredelim=[is][\color{blue}\underbar]{/+}{+/},
+morecomment=[s][\emph]{<options}{>}, morecomment=[l]{\%},
+commentstyle=\color{darkgray}\itshape }
+
+\lstset{language=rock}
+\lstset{emph={symmetries,concentration},emphstyle={\bf \color{white!25!black}}}
+
+ \lstdefinestyle{input}{
+ 	frame=leftline,
+ 	framerule=2pt,
+ 	rulecolor=\color{mygreen},
+ 	backgroundcolor=\color{lightgray},
+ 	basicstyle=\color{black}}
+
+ \lstdefinestyle{output}{
+ 	frame=leftline,
+ 	framerule=2pt,
+ 	rulecolor=\color{gray},
+ 	backgroundcolor=\color{lightergray},
+ 	basicstyle=\scriptsize\ttfamily\color{darkgray},
+ 	% emph={ODF,Miller,PoleFigure,Symmetry,Vector3d,rotation,orientation,vector3d,misorientation,tensor,EBSD},
+        % emphstyle={\color{blue}\underbar}
+        }
+
+
+%  \lstdefinestyle{input}{
+%  	frame=leftline,
+%  	framerule=2pt,
+%  	rulecolor=\color{mygreen},
+%  	backgroundcolor=\color{lightgray},
+%  	basicstyle=\smaller\color{black}}
+
+%  \lstdefinestyle{output}{
+%  	frame=leftline,
+%  	framerule=2pt,
+%  	rulecolor=\color{gray},
+%  	backgroundcolor=\color{lightergray},
+%  	basicstyle=\scriptsize\ttfamily\color{darkgray}
+%  	}
+% %emph={ODF,Miller,PoleFigure,Symmetry,Vector3d,rotation,orientation,vector3d,misori%entation,tensor},
+% %        emphstyle={\color{blue}\underbar}
+
+        \newcommand{\mat}[1]{\boldsymbol{\mathrm{{#1}}}}
+\newtheorem{Remark}{Remark}
+\newtheorem{Proposition}{Proposition}
+\renewcommand{\O}{\mathcal O}
+\newcommand{\PGroup}{S_\text{Point}}
+\newcommand{\Y}{\mathcal Y}
+\renewcommand{\angle}{\measuredangle}
+\newcommand{\mtex}{{\large \bf{\color{red}M}TEX\,}}%
+\newcommand{\MTEX}{{\bf {\color{red}M}TEX\,}}%
+\newcommand{\degree}{\ensuremath{^\circ}}   % Gradzeichen
+%\newcommand{\degree}{^\circ}
+\newcounter{exercisescounter}
+\newenvironment{Exercise}{\refstepcounter{exercisescounter}%
+  \begin{block}{Exercise \arabic{exercisescounter}}}
+  {\end{block}}
+
+\newdimen\contentheight
+\newdimen\contentwidth
+\newdimen\contentleft
+\newdimen\contentbottom
+\makeatletter
+\newcommand*{\calculatespace}{%
+\contentheight=\paperheight%
+\ifx\beamer@frametitle\@empty%
+    \setbox\@tempboxa=\box\voidb@x%
+  \else%
+    \setbox\@tempboxa=\vbox{%
+      \vbox{}%
+      {\parskip0pt\usebeamertemplate***{frametitle}}%
+    }%   
+  \fi%
+  \advance\contentheight by-\ht\@tempboxa%
+  \advance\contentheight by-2em%
+\advance\contentheight by-\dp\@tempboxa%
+\advance\contentheight by-\beamer@frametopskip%
+\ifbeamer@plainframe%
+\contentbottom=0pt%
+\else%
+\advance\contentheight by-\headheight%
+\advance\contentheight by\headdp%
+\advance\contentheight by-\footheight%
+\advance\contentheight by4pt%
+\contentbottom=\footheight%
+\advance\contentbottom by-4pt%
+\fi%
+\contentwidth=\paperwidth%
+\ifbeamer@plainframe%
+\contentleft=0pt%
+\else%
+\advance\contentwidth by-\beamer@rightsidebar%
+\advance\contentwidth by-\beamer@leftsidebar\relax%
+\contentleft=\beamer@leftsidebar%
+\fi%
+}
+\makeatother
